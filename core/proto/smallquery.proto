@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package smallquery;
+
+message Rows {
+    message Record {
+        map<string, string> map = 1;
+    }
+
+    repeated Record records = 1;
+}
+
+message TableData {
+    message Column {
+        string name = 1;
+        string type = 2;
+    }
+
+    string name = 1;
+    repeated Column columns = 2;
+
+    message Record {
+        map<string, string> map = 1;
+    }
+
+    repeated Record records = 3;
+}
