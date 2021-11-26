@@ -42,5 +42,5 @@ TEST_F(SmallQueryTest, SelectQuery) {
     google::protobuf::util::JsonParseOptions options;
     google::protobuf::util::JsonStringToMessage(ret_json, &ret, options);
 
-    ASSERT_EQ(ret.records()[0].map().at("new_answer"), 42 + 123);
+    ASSERT_EQ(ret.records()[0].map().at("new_answer"), "165");
 }
