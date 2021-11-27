@@ -1,2 +1,5 @@
 zetasql/
 bazel-*
+smallquery.egg-info/
+dist/
+*.pyc
