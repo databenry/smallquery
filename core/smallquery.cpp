@@ -46,9 +46,10 @@ std::unique_ptr<zetasql::SimpleTable> create_simple_table(smallquery::TableData&
     std::vector<std::vector<zetasql::Value>> zetasql_records;
     for (auto record : table_data.records()) {
         std::vector<zetasql::Value> zetasql_record;
-        for (auto col : record.map()) {
+        auto m = record.map();
+        for (auto col : table_schema) {
             auto key = col.first;
-            auto val = col.second;
+            auto val = m[col.first];
             // std::cout << "create_simple_table: record: " << key << " - " << val << std::endl;
 
             // TODO: support more data types
