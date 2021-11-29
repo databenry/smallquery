@@ -1,6 +1,15 @@
 ZETASQL_VERSION=2021.09.1
 
 
+.PHONY: build
+build:
+	bazelisk build //core:libsmallquery.so
+
+	rm -rf python/smallquery/lib/
+	mkdir -p python/smallquery/lib/
+	cp bazel-bin/core/*.so python/smallquery/lib/
+
+
 .PHONY: test
 test:
 	bazelisk test --test_output=all //core:test

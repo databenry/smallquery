@@ -6,7 +6,7 @@ setup(
     packages=find_packages(where='python'),
     package_dir={'smallquery': 'python/smallquery'},
     data_files=[
-        ('', ['./bazel-bin/core/libcc_smallquery_core.so'])
+        ('lib', ['./bazel-bin/core/libsmallquery.so'])
     ],
     entry_points={
         'console_scripts': [
