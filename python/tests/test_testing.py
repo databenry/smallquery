@@ -25,16 +25,22 @@ def db():
 
 
 def test_select(db):
-    ret_json = db.execute('select 42 as answer')
-    ret = json.loads(ret_json)
+    ret = db.execute('''
+        select
+            42 as answer
+    ''')
     
     assert len(ret['records']) == 1
     assert ret['records'][0]['map']['answer'] == '42'
 
 
 def test_select_table(db):
-    ret_json = db.execute('select * from my_table')
-    ret = json.loads(ret_json)
+    ret = db.execute('''
+        select
+            *
+        from
+            my_table
+    ''')
 
     assert len(ret['records']) == 2
     assert ret['records'][0]['map']['col_int'] == '1'

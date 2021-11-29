@@ -18,7 +18,8 @@ class Database:
 
     def execute(self, sql):
         sql_str = ctypes.create_string_buffer(sql.encode('utf8'))
-        return libsq.SmallQuery_execute(self.ptr, sql_str)
+        ret_json = libsq.SmallQuery_execute(self.ptr, sql_str)
+        return json.loads(ret_json)
 
     def create_table_from_yaml(self, table_yaml):
         table = yaml.load(table_yaml, Loader=yaml.BaseLoader)

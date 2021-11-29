@@ -18,6 +18,14 @@ public:
     void CreateTable(const char* table_json);
     const char* Execute(const char* sql);
 
+    smallquery::TableData* FindTable(const std::string& table_name) {
+        return &__tables[table_name];
+    }
+
+    void AddTable(const smallquery::TableData& table_data) {
+        __tables[table_data.name()] = table_data;
+    }
+
 private:
     std::string __buf;
     std::map<std::string, smallquery::TableData> __tables;
