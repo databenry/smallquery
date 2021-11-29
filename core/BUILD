@@ -41,14 +41,6 @@ cc_binary(
     deps = [
         ":smallquery_cc.proto",
         ":cc_smallquery_core",
-
-        "@com_google_zetasql//zetasql/public:analyzer",
-        "@com_google_zetasql//zetasql/public:evaluator",
-        "@com_google_zetasql//zetasql/public:simple_catalog",
-        "@com_google_zetasql//zetasql/public:evaluator_table_iterator",
-        "@com_google_zetasql//zetasql/public:value",
-        "@com_google_zetasql//zetasql/public:type",
-        "@com_google_zetasql//zetasql/public/functions:convert_string",
     ],
 )
 
