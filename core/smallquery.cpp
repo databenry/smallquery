@@ -55,16 +55,24 @@ std::unique_ptr<zetasql::SimpleTable> create_simple_table(smallquery::TableData&
 
         for (auto col : table_schema) {
             auto key = col.first;
-            auto val = m[col.first];
+            if (m.count(col.first)) {
+                auto val = m[col.first];
 
-            // TODO: support more data types
-            if (col_types[key] == "int64") {
-                int64_t n;
-                zetasql::functions::StringToNumeric<int64_t>(val, &n, nullptr);
-                zetasql_record.push_back(zetasql::values::Int64(n));
+                // TODO: support more data types
+                if (col_types[key] == "int64") {
+                    int64_t n;
+                    zetasql::functions::StringToNumeric<int64_t>(val, &n, nullptr);
+                    zetasql_record.push_back(zetasql::values::Int64(n));
+                } else {
+                    auto v = zetasql::values::String(val);
+                    zetasql_record.push_back(v);
+                }
             } else {
-                auto v = zetasql::values::String(val);
-                zetasql_record.push_back(v);
+                if (col_types[key] == "int64") {
+                    zetasql_record.push_back(zetasql::values::NullInt64());
+                } else {
+                    zetasql_record.push_back(zetasql::values::NullString());
+                }
             }
         }
 
@@ -165,7 +173,9 @@ smallquery::Rows run_query_dml(SmallQuery* self, zetasql::SimpleCatalog& catalog
             auto m = r->mutable_map();
             for (int i = 0; i < n; ++ i) {
                 // std::cout << "dml: " << table->GetColumn(i)->Name() << " : " << iter->GetColumnValue(i).DebugString() << std::endl;
-                (*m)[table->GetColumn(i)->Name()] = iter->GetColumnValue(i).DebugString();
+                if (! iter->GetColumnValue(i).is_null()) {
+                    (*m)[table->GetColumn(i)->Name()] = iter->GetColumnValue(i).DebugString();
+                }
             }
         } else if (q.resolved_statement()->node_kind() == zetasql::RESOLVED_DELETE_STMT) {
             std::vector<zetasql::Value> key;

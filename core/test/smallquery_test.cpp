@@ -123,3 +123,18 @@ TEST_F(SmallQueryTest, CreateTable) {
     ASSERT_EQ(ret.records()[0].map().at("col1"), "2");
     ASSERT_EQ(ret.records()[0].map().at("answer"), "165");
 }
+
+
+TEST_F(SmallQueryTest, InsertNull) {
+    sq->Execute("create table hello (col1 int64, answer int64)");
+    sq->Execute("insert into hello values (1, NULL)");
+
+    auto ret_json = sq->Execute("select count(distinct col1) as cnt from hello where answer is null");
+
+    smallquery::Rows ret;
+    google::protobuf::util::JsonParseOptions options;
+    google::protobuf::util::JsonStringToMessage(ret_json, &ret, options);
+
+    ASSERT_EQ(ret.records().size(), 1);
+    ASSERT_EQ(ret.records()[0].map().at("cnt"), "1");
+}
