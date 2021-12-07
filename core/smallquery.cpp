@@ -145,26 +145,33 @@ std::vector<std::vector<zetasql::Value>> get_table_contents(const zetasql::Table
 }
 
 
-smallquery::Rows SmallQuery::run_query_dml(zetasql::SimpleCatalog& catalog, const char* sql) {
-    smallquery::Rows rows;
+std::unique_ptr<zetasql::EvaluatorTableModifyIterator> get_modify_iter(zetasql::SimpleCatalog& catalog, zetasql::PreparedModify& q) {
     auto analyzer_options = create_analyzer_options();
-
-    zetasql::PreparedModify q(sql, zetasql::EvaluatorOptions());
 
     auto ret_p = q.Prepare(analyzer_options, &catalog);
 
     if (! ret_p.ok()) {
         std::cerr << ret_p << std::endl;
-        return rows;
+        return NULL;
     }
 
     auto ret_q = q.Execute();
+
     if (! ret_q.ok()) {
         std::cerr << ret_q.status() << std::endl;
-        return rows;
+        return NULL;
     }
 
-    auto iter = std::move(*ret_q);
+    return std::move(*ret_q);
+}
+
+
+smallquery::Rows SmallQuery::run_query_dml(zetasql::SimpleCatalog& catalog, const char* sql) {
+    smallquery::Rows rows;
+
+    zetasql::PreparedModify q(sql, zetasql::EvaluatorOptions());
+
+    auto iter = get_modify_iter(catalog, q);
 
     bool is_delete = iter->GetOperation() == zetasql::EvaluatorTableModifyIterator::Operation::kDelete;
 
