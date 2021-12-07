@@ -29,6 +29,11 @@ public:
 private:
     std::string __buf;
     std::map<std::string, smallquery::TableData> __tables;
+
+    smallquery::Rows run_query(zetasql::SimpleCatalog& catalog, const char* sql);
+    smallquery::Rows run_query_create_table(zetasql::SimpleCatalog& catalog, const zetasql::ResolvedStatement* resolved_stmt);
+    smallquery::Rows run_query_select(zetasql::SimpleCatalog& catalog, const char* sql);
+    smallquery::Rows run_query_dml(zetasql::SimpleCatalog& catalog, const char* sql);
 };
 
 extern "C" {

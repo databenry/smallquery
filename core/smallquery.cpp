@@ -125,7 +125,7 @@ std::vector<std::vector<zetasql::Value>> get_table_contents(const zetasql::Table
 }
 
 
-smallquery::Rows run_query_dml(SmallQuery* self, zetasql::SimpleCatalog& catalog, const char* sql) {
+smallquery::Rows SmallQuery::run_query_dml(zetasql::SimpleCatalog& catalog, const char* sql) {
     smallquery::Rows rows;
     auto analyzer_options = create_analyzer_options();
 
@@ -150,7 +150,7 @@ smallquery::Rows run_query_dml(SmallQuery* self, zetasql::SimpleCatalog& catalog
 
     auto table = iter->table()->GetAs<zetasql::SimpleTable>();
     auto table_rows = get_table_contents(table);
-    auto table_data = self->FindTable(table->Name());
+    auto table_data = this->FindTable(table->Name());
     auto n = table->NumColumns();
 
 
@@ -208,7 +208,7 @@ smallquery::Rows run_query_dml(SmallQuery* self, zetasql::SimpleCatalog& catalog
 }
 
 
-smallquery::Rows run_query_select(SmallQuery* self, zetasql::SimpleCatalog& catalog, const char* sql) {
+smallquery::Rows SmallQuery::run_query_select(zetasql::SimpleCatalog& catalog, const char* sql) {
     smallquery::Rows rows;
     auto analyzer_options = create_analyzer_options();
 
@@ -247,7 +247,7 @@ bool is_create_table(const zetasql::ResolvedStatement* stmt) {
 }
 
 
-smallquery::Rows run_query_create_table(SmallQuery* self, zetasql::SimpleCatalog& catalog, const zetasql::ResolvedStatement* resolved_stmt) {
+smallquery::Rows SmallQuery::run_query_create_table(zetasql::SimpleCatalog& catalog, const zetasql::ResolvedStatement* resolved_stmt) {
     smallquery::Rows rows;
 
     auto create_stmt = resolved_stmt->GetAs<zetasql::ResolvedCreateTableStmt>();
@@ -270,13 +270,13 @@ smallquery::Rows run_query_create_table(SmallQuery* self, zetasql::SimpleCatalog
         }
     }
 
-    self->AddTable(table_data);
+    this->AddTable(table_data);
 
     return rows;
 }
 
 
-smallquery::Rows run_query(SmallQuery* self, zetasql::SimpleCatalog& catalog, const char* sql) {
+smallquery::Rows SmallQuery::run_query(zetasql::SimpleCatalog& catalog, const char* sql) {
     auto analyzer_options = create_analyzer_options();
     std::unique_ptr<const zetasql::AnalyzerOutput> analyzer_output;
     zetasql::TypeFactory type_factory;
@@ -289,11 +289,11 @@ smallquery::Rows run_query(SmallQuery* self, zetasql::SimpleCatalog& catalog, co
     auto resolved_stmt = analyzer_output->resolved_statement();
 
     if (is_dml(resolved_stmt)) {
-        return run_query_dml(self, catalog, sql);
+        return this->run_query_dml(catalog, sql);
     } else if (is_create_table(resolved_stmt)) {
-        return run_query_create_table(self, catalog, resolved_stmt);
+        return this->run_query_create_table(catalog, resolved_stmt);
     } else {
-        return run_query_select(self, catalog, sql);
+        return this->run_query_select(catalog, sql);
     }
 }
 
@@ -309,7 +309,7 @@ const char* SmallQuery::Execute(const char* sql) {
 
     catalog.AddZetaSQLFunctions();
 
-    auto rows = run_query(this, catalog, sql);
+    auto rows = this->run_query(catalog, sql);
 
     __buf.clear();
     google::protobuf::util::MessageToJsonString(rows, &__buf);
