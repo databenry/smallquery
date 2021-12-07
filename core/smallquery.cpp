@@ -166,6 +166,24 @@ std::unique_ptr<zetasql::EvaluatorTableModifyIterator> get_modify_iter(zetasql::
 }
 
 
+absl::flat_hash_map<std::vector<zetasql::Value>, int> create_row_idxs(const zetasql::SimpleTable* table) {
+    auto table_rows = get_table_contents(table);
+    auto pk_idx = table->PrimaryKey().value();
+    absl::flat_hash_map<std::vector<zetasql::Value>, int> row_idxs;
+
+    for (int i = 0; i < table_rows.size(); ++ i) {
+        auto r = table_rows[i];
+        std::vector<zetasql::Value> key;
+        for (int idx : pk_idx) {
+            key.push_back(r[idx]);
+        }
+        row_idxs[key] = i;
+    }
+
+    return row_idxs;
+}
+
+
 smallquery::Rows SmallQuery::run_query_dml(zetasql::SimpleCatalog& catalog, const char* sql) {
     smallquery::Rows rows;
 
@@ -176,21 +194,10 @@ smallquery::Rows SmallQuery::run_query_dml(zetasql::SimpleCatalog& catalog, cons
     bool is_delete = iter->GetOperation() == zetasql::EvaluatorTableModifyIterator::Operation::kDelete;
 
     auto table = iter->table()->GetAs<zetasql::SimpleTable>();
-    auto table_rows = get_table_contents(table);
     auto table_data = this->FindTable(table->Name());
     auto n = table->NumColumns();
 
-
-    auto pk_idx = table->PrimaryKey().value();
-    absl::flat_hash_map<std::vector<zetasql::Value>, int> row_idxs;
-    for (int i = 0; i < table_rows.size(); ++ i) {
-        auto r = table_rows[i];
-        std::vector<zetasql::Value> key;
-        for (int idx : pk_idx) {
-            key.push_back(r[idx]);
-        }
-        row_idxs[key] = i;
-    }
+    auto row_idxs = create_row_idxs(table);
 
     absl::flat_hash_set<int> deleted_rows;
 
