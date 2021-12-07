@@ -29,6 +29,43 @@ zetasql::AnalyzerOptions create_analyzer_options() {
 }
 
 
+const zetasql::Type* resolve_type_name(const std::string& type) {
+    // TODO: more type
+    if (type == "int64") {
+        return zetasql::types::Int64Type();
+    } else {
+        return zetasql::types::StringType();
+    }
+
+}
+
+
+zetasql::Value resolve_value(const std::string& type, const std::string& val) {
+    // TODO: more data types
+    if (type == "int64") {
+        int64_t n;
+        zetasql::functions::StringToNumeric<int64_t>(val, &n, nullptr);
+        return zetasql::values::Int64(n);
+    } else {
+        return zetasql::values::String(val);
+    }
+}
+
+
+zetasql::Value resolve_null_value(const std::string& type) {
+    if (type == "int64") {
+        return zetasql::values::NullInt64();
+    } else {
+        return zetasql::values::NullString();
+    }
+}
+
+
+std::unique_ptr<zetasql::SimpleColumn> create_row_id_column() {
+    return std::unique_ptr<zetasql::SimpleColumn>(new zetasql::SimpleColumn("test", "__row_id", zetasql::types::Int64Type(), true));
+}
+
+
 std::unique_ptr<zetasql::SimpleTable> create_simple_table(smallquery::TableData& table_data) {
     std::vector<zetasql::SimpleTable::NameAndType> table_schema;
     std::map<std::string, std::string> col_types;
@@ -38,13 +75,7 @@ std::unique_ptr<zetasql::SimpleTable> create_simple_table(smallquery::TableData&
         auto type = col.type();
         col_types[key] = type;
 
-        // TODO: type
-        if (type == "int64") {
-            table_schema.push_back({key, zetasql::types::Int64Type()});
-        } else {
-            table_schema.push_back({key, zetasql::types::StringType()});
-        }
-        // std::cout << "create_simple_table: column: " << key << " as " << type << std::endl;
+        table_schema.push_back({key, resolve_type_name(type)});
     }
 
     auto table = std::unique_ptr<zetasql::SimpleTable>(new zetasql::SimpleTable(table_data.name(), table_schema));
@@ -55,24 +86,14 @@ std::unique_ptr<zetasql::SimpleTable> create_simple_table(smallquery::TableData&
 
         for (auto col : table_schema) {
             auto key = col.first;
+            auto type = col_types[key];
+
             if (m.count(col.first)) {
                 auto val = m[col.first];
 
-                // TODO: support more data types
-                if (col_types[key] == "int64") {
-                    int64_t n;
-                    zetasql::functions::StringToNumeric<int64_t>(val, &n, nullptr);
-                    zetasql_record.push_back(zetasql::values::Int64(n));
-                } else {
-                    auto v = zetasql::values::String(val);
-                    zetasql_record.push_back(v);
-                }
+                zetasql_record.push_back(resolve_value(type, val));
             } else {
-                if (col_types[key] == "int64") {
-                    zetasql_record.push_back(zetasql::values::NullInt64());
-                } else {
-                    zetasql_record.push_back(zetasql::values::NullString());
-                }
+                zetasql_record.push_back(resolve_null_value(type));
             }
         }
 
@@ -82,8 +103,7 @@ std::unique_ptr<zetasql::SimpleTable> create_simple_table(smallquery::TableData&
         zetasql_records.push_back(zetasql_record);
     }
 
-    std::unique_ptr<zetasql::SimpleColumn> col_row_id(
-        new zetasql::SimpleColumn("test", "__row_id", zetasql::types::Int64Type(), true));
+    auto col_row_id = create_row_id_column();
     table->AddColumn(col_row_id.release(), true);
 
     table->SetContents(zetasql_records);
