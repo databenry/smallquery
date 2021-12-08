@@ -1,0 +1,12 @@
+name: my_table
+columns:
+- name: col_int
+  type: int64
+- name: col_str
+  type: string
+
+records:
+- col_int: 1
+  col_str: hello
+- col_int: 2
+  col_str: world

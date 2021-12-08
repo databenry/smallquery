@@ -1,0 +1,7 @@
+zetasql/
+bazel-*
+smallquery.egg-info/
+dist/
+*.pyc
+build/
+python/smallquery/lib
