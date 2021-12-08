@@ -14,7 +14,7 @@ def run_query(args, f_in, f_out):
     ret = db.execute(query)
 
     for r in ret['records']:
-        f_out.write(json.dumps(r['map']))
+        f_out.write(json.dumps(r))
         f_out.write('\n')
 
 

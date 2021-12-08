@@ -31,7 +31,7 @@ def test_select(db):
     ''')
     
     assert len(ret['records']) == 1
-    assert ret['records'][0]['map']['answer'] == '42'
+    assert ret['records'][0]['answer'] == '42'
 
 
 def test_select_table(db):
@@ -43,7 +43,7 @@ def test_select_table(db):
     ''')
 
     assert len(ret['records']) == 2
-    assert ret['records'][0]['map']['col_int'] == '1'
-    assert ret['records'][0]['map']['col_str'] == '"hello"'
-    assert ret['records'][1]['map']['col_int'] == '2'
-    assert ret['records'][1]['map']['col_str'] == '"world"'
+    assert ret['records'][0]['col_int'] == '1'
+    assert ret['records'][0]['col_str'] == '"hello"'
+    assert ret['records'][1]['col_int'] == '2'
+    assert ret['records'][1]['col_str'] == '"world"'
