@@ -77,14 +77,14 @@ $ make zetasql
 $ make
 ```
 
-And then, you can install SmallQuery (Python) as follows:
+And then, we can install SmallQuery (Python) as follows:
 
 ```
 $ cd python
 $ pip install .
 ```
 
-For now, you might need to set LD_LIBRARY_PATH properly:
+For now, we might need to set LD_LIBRARY_PATH properly:
 
 ```
 $ export LD_LIBRARY_PATH=$HOME/.local/lib
