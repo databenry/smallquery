@@ -107,7 +107,7 @@ $ make test
 
 ### License
 
-[Apache License 2.0](LICENSE)
+[Apache License 2.0](LICENSE) / Copyright 2021 Hiroyuki Sano
 
 
 ### Special Thanks
@@ -119,9 +119,3 @@ https://github.com/google/zetasql
 ### Related Project
 
 https://github.com/duckdb/duckdb
-
-
-
-### Author
-
-[Hiroyuki Sano](https://github.com/sh19910711)
