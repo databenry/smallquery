@@ -116,7 +116,7 @@ https://github.com/google/zetasql
 
 
 
-### Related Projects
+### Related Project
 
 https://github.com/duckdb/duckdb
 
