@@ -101,6 +101,7 @@ $ make test
 ### :heavy_check_mark: TODO
 
 - [ ] Simplify Installation
+- [ ] Handle more data types
 - [ ] Support Python UDF
 - [ ] Integrate with dbt
 - [ ] Add Pandas DataFrame Interface
