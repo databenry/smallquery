@@ -1,14 +1,38 @@
 ## SmallQuery
 
-This repository is still under construction and experimental, so please be careful to use for any purpose.
+:warning: This repository is still under construction and experimental, so please be careful to use for any purpose.
 
-### Usage
+### Usage Examples
 
 #### CLI
 
-```
+```sql
 $ echo select 42 as answer | smallquery
 {"answer": "42"}
+```
+
+YAML support
+
+```yaml
+$ cat ./example/my_table.yaml
+name: my_table
+columns:
+- name: col_int
+  type: int64
+- name: col_str
+  type: string
+
+records:
+- col_int: 1
+  col_str: hello
+- col_int: 2
+  col_str: world
+```
+
+```sql
+$ echo 'select * from my_table' | smallquery ./example/my_table.yaml
+{"col_str": "\"hello\"", "col_int": "1"}
+{"col_str": "\"world\"", "col_int": "2"}
 ```
 
 #### Python
@@ -38,6 +62,12 @@ $ python3 example/hello.py
 answer is 42
 ```
 
+
 ### License
 
 [Apache License 2.0](LICENSE)
+
+
+### Special Thanks
+
+https://github.com/google/zetasql
