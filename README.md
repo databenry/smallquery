@@ -2,7 +2,7 @@
 
 :warning: This repository is still under construction and experimental, so please be careful to use for any purpose.
 
-SmallQuery allows us to query data on local via SQL compatible with [BigQuery Standard SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/enabling-standard-sql), and it aims to support test-driven development for the ETL pipeline.
+SmallQuery allows us to query data on local via SQL compatible with [BigQuery Standard SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/enabling-standard-sql), and it aims to support test-driven development for the ETL pipeline using BigQuery.
 
 ### Usage Examples
 
@@ -113,3 +113,15 @@ $ make test
 ### Special Thanks
 
 https://github.com/google/zetasql
+
+
+
+### Related Projects
+
+https://github.com/duckdb/duckdb
+
+
+
+### Author
+
+[Hiroyuki Sano](https://github.com/sh19910711)
