@@ -113,7 +113,5 @@ $ make test
 
 ### Links
 
-- Special Thanks
-    - https://github.com/google/zetasql
-- Related Project
-    - https://github.com/duckdb/duckdb
+- Special Thanks: https://github.com/google/zetasql
+- Related Project: https://github.com/duckdb/duckdb
