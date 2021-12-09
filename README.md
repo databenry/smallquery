@@ -107,7 +107,7 @@ $ make test
 
 ### License
 
-[Apache License 2.0](LICENSE) / Copyright 2021 Hiroyuki Sano
+[Apache License 2.0](LICENSE) / Copyright 2021 [Hiroyuki Sano](https://github.com/sh19910711)
 
 
 ### Special Thanks
