@@ -65,7 +65,7 @@ answer is 42
 
 ### Installation
 
-WIP: under construction now
+WIP: under construction now :runner: :runner:
 
 SmallQuery::Core (C++) can be built with the following command:
 
@@ -80,6 +80,13 @@ And then, you can install SmallQuery (Python) as follows:
 ```
 $ cd python
 $ pip install .
+```
+
+For now, you might need to set LD_LIBRARY_PATH properly:
+
+```
+$ export LD_LIBRARY_PATH=$HOME/.local/lib
+$ echo select 42 as answer | smallquery
 ```
 
 Running Tests:
