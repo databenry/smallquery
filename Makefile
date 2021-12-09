@@ -24,8 +24,6 @@ test:
 zetasql:
 	rm -rf zetasql
 	git clone --depth 1 -b $(ZETASQL_VERSION) https://github.com/google/zetasql
-	sed -i 's;//zetasql/base:zetasql_implementation;//visibility:public;' zetasql/zetasql/parser/BUILD
-	sed -i 's;//zetasql/base:zetasql_implementation;//visibility:public;' zetasql/zetasql/resolved_ast/BUILD
 
 
 .PHONY: bazelisk
