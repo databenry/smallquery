@@ -3,6 +3,8 @@ ZETASQL_VERSION=2021.09.1
 
 .PHONY: build
 build:
+	pip3 install -r ./python/requirements.txt
+
 	bazelisk build //core:libsmallquery.so
 
 	rm -rf python/smallquery/lib/
