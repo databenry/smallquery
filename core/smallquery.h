@@ -14,8 +14,8 @@
 // limitations under the License.
 //
 
-#ifndef __MAPQUERY_H__
-#define __MAPQUERY_H__
+#ifndef __SMALLQUERY_H__
+#define __SMALLQUERY_H__
 
 #include <string>
 

@@ -47,3 +47,19 @@ def test_select_table(db):
     assert ret['records'][0]['col_str'] == '"hello"'
     assert ret['records'][1]['col_int'] == '2'
     assert ret['records'][1]['col_str'] == '"world"'
+
+
+def test_empty_records(db):
+    db.create_table_from_yaml('''
+        name: empty_table
+        columns:
+        - name: answer
+          type: int64
+    ''')
+
+    ret = db.execute('select count(1) as cnt from empty_table')
+    assert ret['records'][0]['cnt'] == '0'
+
+    db.execute('insert into empty_table values (42)')
+    ret = db.execute('select count(1) as cnt from empty_table')
+    assert ret['records'][0]['cnt'] == '1'
