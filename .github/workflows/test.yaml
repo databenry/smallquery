@@ -1,0 +1,13 @@
+name: smallquery-test
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: test application
+      run: |
+        make
+        make test
