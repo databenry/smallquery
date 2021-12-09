@@ -9,6 +9,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - uses: actions/cache@v2
+      name: Cache Bazel
+      id: cache-bazel
+      with:
+        path: ~/.cache/bazel
+        key: ${{ runner.os }}-bazel
+
     - name: test application
       run: |
         make bazelisk
