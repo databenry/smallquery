@@ -2,7 +2,7 @@
 
 :warning: This repository is still under construction and experimental, so please be careful to use for any purpose.
 
-SmallQuery allows us to query data on local via SQL compatible with [BigQuery Standard SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/enabling-standard-sql), and it aims to support test-driven development for the ETL pipeline using BigQuery.
+SmallQuery allows us to query data on local via SQL compatible with [BigQuery Standard SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/enabling-standard-sql), and it aims to support test-driven development for the data pipelines using BigQuery.
 
 ### Usage Examples
 
@@ -77,7 +77,7 @@ $ make zetasql
 $ make
 ```
 
-And then, we can install SmallQuery (Python) as follows:
+And then, we can install SmallQuery (Python / CLI) as follows:
 
 ```
 $ cd python
