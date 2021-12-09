@@ -2,7 +2,7 @@ import pytest
 import io
 import json
 from textwrap import dedent
-from python.smallquery.cli import run_query
+from smallquery.cli import run_query
 
 
 def test_cli(tmpdir):

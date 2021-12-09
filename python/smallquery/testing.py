@@ -28,7 +28,10 @@ class Database:
 
     def create_table_from_yaml(self, table_yaml):
         table = yaml.load(table_yaml, Loader=yaml.BaseLoader)
-        table['records'] = [ { 'map': m } for m in table['records'] ]
+        if 'records' in table:
+            table['records'] = [ { 'map': m } for m in table['records'] ]
+        else:
+            table['records'] = []
         table_json = json.dumps(table)
         table_json_str = ctypes.create_string_buffer(table_json.encode('utf8'))
 
