@@ -1,7 +1,7 @@
 import pytest
 import json
 from textwrap import dedent
-from python.smallquery.testing import Database
+from smallquery.testing import Database
 
 
 @pytest.fixture

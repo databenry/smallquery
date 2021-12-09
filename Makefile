@@ -16,6 +16,7 @@ build:
 test:
 	bazelisk test --test_output=all //core:test
 
+	pip3 install -e ./python
 	LD_LIBRARY_PATH=./python/smallquery/lib python3 -m pytest ./python/tests
 
 
