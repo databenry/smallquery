@@ -1,6 +1,8 @@
-## SmallQuery
+## :rocket: SmallQuery
 
 :warning: This repository is still under construction and experimental, so please be careful to use for any purpose.
+
+SmallQuery allows us to query data on local via SQL compatible with BigQuery Standard SQL, and it aims to support test-driven development for the ETL pipeline.
 
 ### Usage Examples
 
