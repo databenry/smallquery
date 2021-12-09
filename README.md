@@ -63,6 +63,38 @@ answer is 42
 ```
 
 
+### Installation
+
+WIP: under construction now
+
+SmallQuery::Core (C++) can be built with the following command:
+
+```
+$ make bazelisk
+$ make zetasql
+$ make
+```
+
+And then, you can install SmallQuery (Python) as follows:
+
+```
+$ cd python
+$ pip install .
+```
+
+Running Tests:
+
+```
+$ make test
+```
+
+
+### :heavy_check_mark: TODO
+
+- [ ] Simplify Installation
+- [ ] Support Python UDF
+- [ ] Integrate with dbt
+
 ### License
 
 [Apache License 2.0](LICENSE)
