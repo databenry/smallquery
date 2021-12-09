@@ -101,6 +101,7 @@ $ make test
 - [ ] Simplify Installation
 - [ ] Support Python UDF
 - [ ] Integrate with dbt
+- [ ] Add Pandas DataFrame Interface
 
 ### License
 
