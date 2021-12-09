@@ -111,12 +111,9 @@ $ make test
 - Copyright 2021 [Hiroyuki Sano](https://github.com/sh19910711)
 
 
-### Special Thanks
+### Links
 
-https://github.com/google/zetasql
-
-
-
-### Related Project
-
-https://github.com/duckdb/duckdb
+- Special Thanks
+    - https://github.com/google/zetasql
+- Related Project
+    - https://github.com/duckdb/duckdb
