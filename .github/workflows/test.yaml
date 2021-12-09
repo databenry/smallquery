@@ -11,5 +11,7 @@ jobs:
 
     - name: test application
       run: |
+        make bazelisk
+        make zetasql
         make
         make test
