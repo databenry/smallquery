@@ -5,11 +5,11 @@ ZETASQL_VERSION=2021.09.1
 build:
 	pip3 install -r ./python/requirements.txt
 
-	bazelisk build //core:libsmallquery.so
+	PYTHON_BIN_PATH=$(shell which python3) bazelisk build //core:smallquery.so
 
-	rm -rf python/smallquery/lib/
-	mkdir -p python/smallquery/lib/
-	cp bazel-bin/core/*.so python/smallquery/lib/
+	# rm -rf python/smallquery/lib/
+	# mkdir -p python/smallquery/lib/
+	# cp bazel-bin/core/*.so python/smallquery/lib/
 
 
 .PHONY: test

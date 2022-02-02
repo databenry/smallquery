@@ -17,7 +17,7 @@
 #include <iostream>
 #include <google/protobuf/util/json_util.h>
 
-#include "core/smallquery.h"
+#include "smallquery.h"
 
 
 int64_t __global_row_id_counter = 0;

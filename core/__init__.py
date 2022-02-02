@@ -1,0 +1,1 @@
+from _smallquery import SmallQuery
