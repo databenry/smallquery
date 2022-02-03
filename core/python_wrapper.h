@@ -1,5 +1,5 @@
-#ifndef __WRAPPER_H__
-#define __WRAPPER_H__
+#ifndef __PYTHON_WRAPPER_H__
+#define __PYTHON_WRAPPER_H__
 
 #include "pybind11/pybind11.h"
 #include "smallquery.h"
