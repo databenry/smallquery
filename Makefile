@@ -4,6 +4,7 @@ ZETASQL_VERSION=2021.09.1
 .PHONY: build
 build:
 	PYTHON_BIN_PATH=$(shell which python3) bazelisk build //core:smallquery
+	PYTHON_BIN_PATH=$(shell which python3) python setup.py sdist bdist_wheel
 
 
 .PHONY: test
