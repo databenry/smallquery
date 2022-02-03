@@ -44,3 +44,12 @@ py_library(
         ":_smallquery.so"
     ]
 )
+
+py_test(
+    name = "py_test",
+    srcs = glob(["test/python/*.py"]),
+    deps = [
+        ":smallquery",
+    ],
+    main = "test/python/main.py",
+)
