@@ -1,6 +1,5 @@
 package(default_visibility = ["//visibility:public"])
 
-# pybind11
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 
 cc_library(
@@ -19,7 +18,7 @@ cc_library(
 )
 
 cc_test(
-    name = "test",
+    name = "cc_test",
     srcs = glob(["test/*.cpp"]),
     deps = [
         "@com_google_googletest//:gtest_main",
@@ -30,7 +29,7 @@ cc_test(
 pybind_extension(
     name = "_smallquery",
     linkstatic = True,
-    srcs = glob(["*.h", "*.cpp"]),
+    srcs = ["wrapper.h"],
     deps = [
         "//core/proto:smallquery_cc_proto",
         ":cc_smallquery",
