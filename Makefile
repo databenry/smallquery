@@ -9,7 +9,9 @@ build:
 .PHONY: test
 test:
 	bazelisk test --test_output=all //core:cc_test
-	# bazelisk test --test_output=all //core:py_test
+	
+	pip3 install pytest
+	bazelisk test --test_output=all //core:py_test
 
 
 .PHONY: zetasql
