@@ -25,7 +25,6 @@
 #include "zetasql/public/value.h"
 #include "zetasql/public/type.h"
 #include "zetasql/public/functions/convert_string.h"
-#include "pybind11/pybind11.h"
 
 #include "core/proto/smallquery.pb.h"
 
@@ -59,14 +58,6 @@ extern "C" {
 
     void SmallQuery_create_table(SmallQuery* self, const char* table_json) { self->CreateTable(table_json); }
     const char* SmallQuery_execute(SmallQuery* self, const char* sql) { self->Execute(sql); }
-}
-
-PYBIND11_MODULE(_smallquery, m) {
-    namespace py = pybind11;
-    py::class_<SmallQuery>(m, "SmallQuery")
-        .def(py::init<>())
-        .def("create_table", &SmallQuery::CreateTable)
-        .def("execute", &SmallQuery::Execute);
 }
 
 #endif

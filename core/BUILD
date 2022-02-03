@@ -3,9 +3,8 @@ package(default_visibility = ["//visibility:public"])
 # pybind11
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 
-pybind_extension(
-    name = "_smallquery",
-    linkstatic = True,
+cc_library(
+    name = "cc_smallquery",
     srcs = glob(["*.h", "*.cpp"]),
     deps = [
         "//core/proto:smallquery_cc_proto",
@@ -16,6 +15,25 @@ pybind_extension(
         "@com_google_zetasql//zetasql/public:value",
         "@com_google_zetasql//zetasql/public:type",
         "@com_google_zetasql//zetasql/public/functions:convert_string",
+    ],
+)
+
+cc_test(
+    name = "test",
+    srcs = glob(["test/*.cpp"]),
+    deps = [
+        "@com_google_googletest//:gtest_main",
+        ":cc_smallquery",
+    ],
+)
+
+pybind_extension(
+    name = "_smallquery",
+    linkstatic = True,
+    srcs = glob(["*.h", "*.cpp"]),
+    deps = [
+        "//core/proto:smallquery_cc_proto",
+        ":cc_smallquery",
     ]
 )
 
