@@ -11,8 +11,9 @@ build:
 test:
 	bazelisk test --test_output=all //core:cc_test
 	
-	pip3 install pytest
-	bazelisk test --test_output=all //core:py_test
+	# PYTHON_BIN_PATH=$(shell which python3) pip3 install .
+	# pip3 install pytest
+	# bazelisk test --test_output=all //core:py_test
 
 
 .PHONY: zetasql
