@@ -30,6 +30,8 @@ jobs:
     - name: test application
       run: |
         pip3 install wheel
+        PYTHON_BIN_PATH=$(shell which python3) python setup.py bdist_wheel
+
         make bazelisk
         make zetasql
         make
