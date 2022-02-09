@@ -1,4 +1,4 @@
-name: smallquery-test
+name: smallquery-package
 
 on: [ push ]
 
@@ -24,4 +24,4 @@ jobs:
       run: |
         make bazelisk
         make zetasql
-        make
+        make test
