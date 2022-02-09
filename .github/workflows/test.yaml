@@ -18,7 +18,7 @@ jobs:
       id: cache-build
       with:
         path: build
-        key: ${{ runner.os }}-build-v20220209-0
+        key: ${{ runner.os }}-build-v20220209-1
 
     - name: test application
       run: |
