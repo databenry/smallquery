@@ -13,11 +13,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: pip-cache
+      id: pip-cache
+      run: |
+        python -c "from pip._internal.locations import USER_CACHE_DIR; print('::set-output name=dir::' + USER_CACHE_DIR)"
+
     - uses: actions/cache@v2
       name: Cache Build
       id: cache-build
       with:
-        path: build
+        path: ${{ steps.pip-cache.outputs.dir }}
         key: ${{ runner.os }}-build-v20220209-1
 
     - name: test application
