@@ -18,7 +18,7 @@ jobs:
       id: cache-bazel
       with:
         path: ~/.cache/bazel
-        key: ${{ runner.os }}-bazel-v20220209-0
+        key: ${{ runner.os }}-bazel-v20220209-5
 
     - name: test application
       run: |
