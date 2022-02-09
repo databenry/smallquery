@@ -25,11 +25,11 @@ jobs:
         path: ${{ steps.pip-cache.outputs.dir }}
         key: ${{ runner.os }}-build-v20220209-3
 
-    - name: test application
+    - name: build wheel
       run: |
         make bazelisk
         make zetasql
-        make
+        make wheel/${{ runner.os }}
 
     - uses: actions/upload-artifact@v2
       with:
