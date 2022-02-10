@@ -20,10 +20,11 @@ jobs:
         path: |
           ./build
           ~/.cache/bazel
-        key: ${{ runner.os }}-build-v20220209-9
+        key: ${{ runner.os }}-build-v20220210-0
 
     - name: build wheel
       run: |
+        mkdir -p ~/.cache/bazel
         make bazelisk
         make zetasql
         make wheel/${{ runner.os }}

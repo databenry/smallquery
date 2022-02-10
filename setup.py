@@ -29,12 +29,15 @@ class BuildBazelExtension(build_ext.build_ext):
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
 
+        bazel_cache_dir = os.path.join(home_dir, ".cache", "cibuildwheel_bazel_cache")
+
         bazel_argv = [
             'bazelisk',
             'build',
             ext.bazel_target,
             '--symlink_prefix=' + os.path.join(self.build_temp, 'bazel-'),
             '--compilation_mode=' + ('dbg' if self.debug else 'opt'),
+            '--output_user_root=' + bazel_cache_dir,
         ]
 
         self.spawn(bazel_argv)
