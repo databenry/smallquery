@@ -35,11 +35,11 @@ class BuildBazelExtension(build_ext.build_ext):
 
         bazel_argv = [
             'bazelisk',
+            '--output_user_root=' + bazel_cache_dir,
             'build',
             ext.bazel_target,
             '--symlink_prefix=' + os.path.join(self.build_temp, 'bazel-'),
             '--compilation_mode=' + ('dbg' if self.debug else 'opt'),
-            '--output_user_root=' + bazel_cache_dir,
         ]
 
         self.spawn(bazel_argv)
