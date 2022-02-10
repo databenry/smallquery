@@ -30,6 +30,7 @@ jobs:
         uses: pypa/cibuildwheel@v2.2.2
         env:
           CIBW_BEFORE_ALL: |
+            apt install -y gcc g++
             python3 tools/ci/bazelisk.py --version
             make zetasql
           CIBW_ARCHS_LINUX: auto aarch64
