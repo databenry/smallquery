@@ -31,7 +31,7 @@ class BuildBazelExtension(build_ext.build_ext):
             os.makedirs(self.build_temp)
 
         home_dir = str(pathlib.Path.home())
-        bazel_cache_dir = os.path.join(home_dir, ".cache", "cibuildwheel_bazel_cache")
+        bazel_cache_dir = os.path.join(home_dir, ".cache", "bazel")
 
         bazel_argv = [
             'python3',

@@ -20,7 +20,7 @@ jobs:
         path: |
           ./build
           ~/.cache/bazel
-        key: ${{ runner.os }}-build-v20220210-0
+        key: ${{ runner.os }}-build-v20220210-1
 
     - name: build wheel
       run: |
