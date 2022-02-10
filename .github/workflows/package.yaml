@@ -4,7 +4,7 @@ on: [ push ]
 
 jobs:
   build:
-    name: Build wheels on ${{ matrix.os }}
+    name: Build wheels on ${{ matrix.os }} (${{ matrix.python-version }})
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -26,7 +26,7 @@ jobs:
         path: |
           ./build
           ~/.cache/bazel
-        key: ${{ runner.os }}-build-v20220210-1
+        key: ${{ runner.os }}-${{ matrix.python-version }}-build-v20220210
 
     - name: build wheel
       run:
