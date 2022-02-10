@@ -63,7 +63,7 @@ class BuildBazelExtension(build_ext.build_ext):
 
 setup(
     name='smallquery',
-    version='202202.10.0',
+    version='202202.10.1',
     python_requires='>=3.4',
     packages=find_packages(),
     cmdclass=dict(build_ext=BuildBazelExtension),
