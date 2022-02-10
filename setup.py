@@ -41,6 +41,7 @@ class BuildBazelExtension(build_ext.build_ext):
             ext.bazel_target,
             '--symlink_prefix=' + os.path.join(self.build_temp, 'bazel-'),
             '--compilation_mode=' + ('dbg' if self.debug else 'opt'),
+            '--verbose_failures',
         ]
 
         self.spawn(bazel_argv)
