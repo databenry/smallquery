@@ -30,9 +30,7 @@ jobs:
 
     - name: build wheel
       run:
-        make bazelisk
-        make zetasql
-        make wheel/${{ runner.os }}
+        make bazelisk zetasql wheel/${{ runner.os }}
 
     - uses: actions/upload-artifact@v2
       with:
