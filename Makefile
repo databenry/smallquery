@@ -3,12 +3,12 @@ ZETASQL_VERSION=2021.09.1
 
 .PHONY: wheel/Linux
 wheel/Linux:
-	PYTHON_BIN_PATH=$(shell which python3) python3 setup.py sdist
+	python3 setup.py sdist
 	PYTHON_BIN_PATH=$(shell which python3) python3 setup.py bdist_wheel --keep-temp -p manylinux1_x86_64
 
 .PHONY: wheel/macOS
 wheel/macOS:
-	PYTHON_BIN_PATH=$(shell which python3) python3 setup.py sdist
+	python3 setup.py sdist
 	PYTHON_BIN_PATH=$(shell which python3) python3 setup.py bdist_wheel --keep-temp
 
 .PHONY: test

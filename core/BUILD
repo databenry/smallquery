@@ -29,7 +29,7 @@ cc_test(
 pybind_extension(
     name = "_smallquery",
     linkstatic = True,
-    srcs = ["python_wrapper.h"],
+    srcs = ["python_wrapper.h", ":cc_smallquery"],
     deps = [
         "//core/proto:smallquery_cc_proto",
         ":cc_smallquery",
