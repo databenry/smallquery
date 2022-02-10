@@ -30,18 +30,12 @@ class BuildBazelExtension(build_ext.build_ext):
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
 
-        home_dir = str(pathlib.Path.home())
-        bazel_cache_dir = os.path.join(home_dir, ".cache", "bazel")
-
         bazel_argv = [
-            'python3',
-            'tools/ci/bazelisk.py',
-            '--output_user_root=' + bazel_cache_dir,
+            'bazelisk',
             'build',
             ext.bazel_target,
             '--symlink_prefix=' + os.path.join(self.build_temp, 'bazel-'),
             '--compilation_mode=' + ('dbg' if self.debug else 'opt'),
-            '--verbose_failures',
         ]
 
         self.spawn(bazel_argv)
@@ -70,7 +64,7 @@ class BuildBazelExtension(build_ext.build_ext):
 
 setup(
     name='smallquery',
-    version='202202.10.3',
+    version='202202.10.4',
     python_requires='>=3.4',
     packages=find_packages(),
     cmdclass=dict(build_ext=BuildBazelExtension),

@@ -24,8 +24,7 @@ jobs:
         key: ${{ runner.os }}-build-v20220210-1
 
     - name: build wheel
-      run: |
-        mkdir -p ~/.cache/bazel
+      run:
         make bazelisk
         make zetasql
         make wheel/${{ runner.os }}
