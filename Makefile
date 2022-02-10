@@ -3,6 +3,7 @@ ZETASQL_VERSION=2021.09.1
 
 .PHONY: wheel
 wheel:
+	rm -rf build/bdist*
 	pip3 install wheel
 	python3 setup.py sdist
 	PYTHON_BIN_PATH=$(shell which python3) python3 setup.py bdist_wheel -p manylinux1_x86_64
