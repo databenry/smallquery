@@ -34,7 +34,8 @@ class BuildBazelExtension(build_ext.build_ext):
         bazel_cache_dir = os.path.join(home_dir, ".cache", "cibuildwheel_bazel_cache")
 
         bazel_argv = [
-            'bazelisk',
+            'python3',
+            'tools/ci/bazelisk.py',
             '--output_user_root=' + bazel_cache_dir,
             'build',
             ext.bazel_target,
