@@ -1,5 +1,6 @@
 import os
 import shutil
+import pathlib
 import posixpath
 import setuptools
 from setuptools import setup, find_packages
@@ -29,6 +30,7 @@ class BuildBazelExtension(build_ext.build_ext):
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
 
+        home_dir = str(pathlib.Path.home())
         bazel_cache_dir = os.path.join(home_dir, ".cache", "cibuildwheel_bazel_cache")
 
         bazel_argv = [
