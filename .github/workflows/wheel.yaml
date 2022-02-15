@@ -27,7 +27,8 @@ jobs:
         run:
           python3 -m cibuildwheel --output-dir wheelhouse
         env:
-          CIBW_BEFORE_ALL: make zetasql wheel
+          CIBW_BEFORE_ALL: make zetasql
+          CIBW_SKIP: pp* *-win* *-mac*
           CIBW_ENVIRONMENT: |
             CIBUILDWHEEL_BAZEL_CACHE=/host/tmp/bazel
 
