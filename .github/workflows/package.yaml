@@ -1,18 +1,17 @@
 name: smallquery-package
 
-on: [ push ]
+on: [] # on: [ push ]
 
 jobs:
   build:
     name: Build wheels on python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
-    container: quay.io/pypa/manylinux1_x86_64
     strategy:
       matrix:
         python-version: ['cp37-cp37m', 'cp38-cp38', 'cp39-cp39']
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
     - uses: actions/cache@v2
       name: Cache Build

@@ -1,6 +1,6 @@
 name: smallquery-test
 
-on: [ push ]
+on: [] # on: [ push ]
 
 jobs:
   build:
