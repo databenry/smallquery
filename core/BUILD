@@ -5,9 +5,6 @@ load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 pybind_extension(
     name = "_smallquery",
     srcs = glob(["*.h", "*.cpp"]),
-    copts = [
-        "--std=c++14",
-    ],
     features = ["-use_header_modules"],
     linkstatic = True,
     deps = [

@@ -1,1 +1,1 @@
-build --jobs=16 --cxxopt="-std=c++1z"
+build --jobs=16 --cxxopt="-std=c++1z -D_GLIBCXX_USE_CXX11_ABI=0"
