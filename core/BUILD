@@ -33,7 +33,6 @@ pybind_extension(
     srcs = ["python_wrapper.h", ":cc_smallquery"],
     deps = [
         "//core/proto:smallquery_cc_proto",
-        ":cc_smallquery",
     ]
 )
 
