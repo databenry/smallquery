@@ -5,6 +5,7 @@ load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 cc_library(
     name = "cc_smallquery",
     srcs = glob(["*.h", "*.cpp"]),
+    linkstatic = True,
     deps = [
         "//core/proto:smallquery_cc_proto",
         "@com_google_zetasql//zetasql/public:analyzer",
