@@ -29,9 +29,10 @@ jobs:
         env:
           CIBW_BEFORE_ALL: make zetasql
           CIBW_SKIP: cp27-* cp35-* cp36-* pp* *_i686 *-win32 *-musllinux*
-          # CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux1_x86_64
+          CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux_2_24_x86_64
           CIBW_ENVIRONMENT: |
             CIBUILDWHEEL_BAZEL_CACHE=/host/tmp/bazel
+            CIBUILDWHEEL_BAZEL_PREFIX=temp
             BAZEL_LINKOPTS=-static-libstdc++
             BAZEL_LINKLIBS=-l%:libstdc++.a
 

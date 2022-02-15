@@ -36,7 +36,7 @@ class BuildBazelExtension(build_ext.build_ext):
             '--output_user_root=' + os.environ['CIBUILDWHEEL_BAZEL_CACHE'],
             'build',
             ext.bazel_target,
-            '--symlink_prefix=' + os.path.join(self.build_temp, 'bazel-'),
+            '--symlink_prefix=' + os.path.join(os.environ['CIBUILDWHEEL_BAZEL_PREFIX'], 'bazel-'),
             '--compilation_mode=' + ('dbg' if self.debug else 'opt'),
         ]
 
@@ -46,7 +46,7 @@ class BuildBazelExtension(build_ext.build_ext):
             ext.name = "_" + ext.name
         shared_lib_ext = ".so"
         shared_lib = ext.name + shared_lib_ext
-        ext_bazel_bin_path = os.path.join(self.build_temp, "bazel-bin", ext.relpath, shared_lib)
+        ext_bazel_bin_path = os.path.join(os.environ['CIBUILDWHEEL_BAZEL_PREFIX'], "bazel-bin", ext.relpath, shared_lib)
         print(f'ext_bazel_bin_path = {ext_bazel_bin_path}')
 
         ext_dest_path = self.get_ext_fullpath(ext.name)
