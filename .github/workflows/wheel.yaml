@@ -32,6 +32,8 @@ jobs:
           # CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux1_x86_64
           CIBW_ENVIRONMENT: |
             CIBUILDWHEEL_BAZEL_CACHE=/host/tmp/bazel
+            BAZEL_LINKOPTS=-static-libstdc++
+            BAZEL_LINKLIBS=-l%:libstdc++.a
 
       - uses: actions/upload-artifact@v2
         with:
