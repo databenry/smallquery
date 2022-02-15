@@ -25,7 +25,7 @@ jobs:
         path: |
           ./build
           ~/.cache/bazel
-        key: ${{ runner.os }}-build-v20220215-0
+        key: ${{ runner.os }}-${{ matrix.python-version }}-build-v20220215-0
 
     - name: build wheel
       run:
