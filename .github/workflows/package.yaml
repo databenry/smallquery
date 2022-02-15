@@ -6,13 +6,12 @@ jobs:
   build:
     name: Build wheels on python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
-    container: quay.io/pypa/manylinux2010_x86_64
     strategy:
       matrix:
         python-version: ['3.6', '3.7', '3.8', '3.9']
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
 
     - name: Set up Python
       uses: actions/setup-python@v2
