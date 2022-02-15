@@ -1,9 +1,9 @@
 workspace(name = "com_smallquery")
 
-
-# pybind11
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+
+# pybind11
 http_archive(
   name = "pybind11_bazel",
   strip_prefix = "pybind11_bazel-72cbbf1fbc830e487e3012862b7b720001b70672",

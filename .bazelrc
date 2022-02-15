@@ -1,1 +1,1 @@
-build --jobs=16 --cxxopt="-std=c++1z"
+build --jobs=16 --cxxopt="-std=c++1z" --incompatible_restrict_string_escapes=false --incompatible_blacklisted_protos_requires_proto_info=false --incompatible_require_linker_input_cc_api=false --incompatible_linkopts_to_linklibs
