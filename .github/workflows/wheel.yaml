@@ -28,9 +28,10 @@ jobs:
           python3 -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BEFORE_ALL: make zetasql
-          CIBW_SKIP: pp* *-win* *-mac*
+          CIBW_SKIP: cp27-* cp35-* cp36-* pp* *_i686 *-win32 *-musllinux*
           CIBW_ENVIRONMENT: |
             CIBUILDWHEEL_BAZEL_CACHE=/host/tmp/bazel
+            BAZEL_LINKLIBS=-lstdc++
 
       - uses: actions/upload-artifact@v2
         with:
