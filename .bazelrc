@@ -1,2 +1,1 @@
-build --incompatible_linkopts_to_linklibs
 build --jobs=16 --cxxopt="-std=c++1z"
