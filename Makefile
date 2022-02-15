@@ -10,8 +10,7 @@ wheel:
 
 .PHONY: test
 test:
-	PYTHON_BIN_PATH=$(shell which python3) bazelisk build //core:smallquery
-	PYTHON_BIN_PATH=$(shell which python3) bazelisk test --test_output=all //core:cc_test
+	PYTHON_BIN_PATH=$(shell which python3) python3 setup.py bdist_wheel -p manylinux1_x86_64
 	
 	# PYTHON_BIN_PATH=$(shell which python3) pip3 install .
 	# pip3 install pytest
