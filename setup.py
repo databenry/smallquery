@@ -31,7 +31,8 @@ class BuildBazelExtension(build_ext.build_ext):
             os.makedirs(self.build_temp)
 
         bazel_argv = [
-            'bazelisk',
+            'python3',
+            'tools/ci/bazelisk.py',
             'build',
             ext.bazel_target,
             '--symlink_prefix=' + os.path.join(self.build_temp, 'bazel-'),
