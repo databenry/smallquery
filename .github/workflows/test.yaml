@@ -4,11 +4,8 @@ on: [ push ]
 
 jobs:
   build:
-    name: Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-20.04]
+    name: Test
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
@@ -18,7 +15,7 @@ jobs:
       id: cache-bazel
       with:
         path: ~/.cache/bazel
-        key: ${{ runner.os }}-bazel-v20220209-5
+        key: ${{ runner.os }}-bazel-v20220215-0
 
     - name: test application
       run: |

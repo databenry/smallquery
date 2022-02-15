@@ -4,7 +4,6 @@ load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 
 pybind_extension(
     name = "_smallquery",
-    linkstatic = True,
     srcs = glob(["*.h", "*.cpp"]),
     deps = [
         "//core/proto:smallquery_cc_proto",
