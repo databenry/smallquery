@@ -33,11 +33,11 @@ class BuildBazelExtension(build_ext.build_ext):
         bazel_argv = [
             'python3',
             'tools/ci/bazelisk.py',
+            '--output_user_root=' + os.environ['CIBUILDWHEEL_BAZEL_CACHE'],
             'build',
             ext.bazel_target,
             '--symlink_prefix=' + os.path.join(self.build_temp, 'bazel-'),
             '--compilation_mode=' + ('dbg' if self.debug else 'opt'),
-            '--output_user_root=' + os.environ['CIBUILDWHEEL_BAZEL_CACHE'],
         ]
 
         self.spawn(bazel_argv)
