@@ -4,12 +4,11 @@ on: [ push ]
 
 jobs:
   build:
-    name: Build wheels on ${{ matrix.os }} (${{ matrix.python-version }})
-    runs-on: ${{ matrix.os }}
+    name: Build wheels on python ${{ matrix.python-version }}
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        os: [ubuntu-20.04]
-        python-version: ['3.7', '3.8']
+        python-version: ['3.7', '3.8', '3.9']
 
     steps:
     - uses: actions/checkout@v2
@@ -26,7 +25,7 @@ jobs:
         path: |
           ./build
           ~/.cache/bazel
-        key: ${{ runner.os }}-build-v20220210-1
+        key: ${{ runner.os }}-build-v20220215-0
 
     - name: build wheel
       run:

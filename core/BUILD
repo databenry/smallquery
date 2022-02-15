@@ -5,7 +5,6 @@ load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 cc_library(
     name = "cc_smallquery",
     srcs = glob(["*.h", "*.cpp"]),
-    linkstatic = True,
     deps = [
         "//core/proto:smallquery_cc_proto",
         "@com_google_zetasql//zetasql/public:analyzer",
@@ -30,9 +29,16 @@ cc_test(
 pybind_extension(
     name = "_smallquery",
     linkstatic = True,
-    srcs = ["python_wrapper.h", ":cc_smallquery"],
+    srcs = glob(["*.h", "*.cpp"]),
     deps = [
         "//core/proto:smallquery_cc_proto",
+        "@com_google_zetasql//zetasql/public:analyzer",
+        "@com_google_zetasql//zetasql/public:evaluator",
+        "@com_google_zetasql//zetasql/public:simple_catalog",
+        "@com_google_zetasql//zetasql/public:evaluator_table_iterator",
+        "@com_google_zetasql//zetasql/public:value",
+        "@com_google_zetasql//zetasql/public:type",
+        "@com_google_zetasql//zetasql/public/functions:convert_string",
     ]
 )
 
