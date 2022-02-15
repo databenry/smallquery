@@ -36,6 +36,7 @@ class BuildBazelExtension(build_ext.build_ext):
             '--output_user_root=' + os.environ['CIBUILDWHEEL_BAZEL_CACHE'],
             'build',
             ext.bazel_target,
+            '--action_env=BAZEL_LINKOPTS=-lstdc++',
             '--symlink_prefix=' + os.path.join(self.build_temp, 'bazel-'),
             '--compilation_mode=' + ('dbg' if self.debug else 'opt'),
         ]
