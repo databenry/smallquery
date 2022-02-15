@@ -5,7 +5,7 @@ on: [ push ]
 jobs:
   build:
     name: Build wheels on python ${{ matrix.python-version }}
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-16.04
     strategy:
       matrix:
         python-version: ['3.6', '3.7', '3.8', '3.9']

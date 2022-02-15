@@ -5,7 +5,8 @@ load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 pybind_extension(
     name = "_smallquery",
     srcs = glob(["*.h", "*.cpp"]),
-    linkstatic = False,
+    features = ["-use_header_modules"],
+    linkstatic = True,
     deps = [
         "//core/proto:smallquery_cc_proto",
         "@com_google_zetasql//zetasql/public:analyzer",
