@@ -29,7 +29,7 @@ jobs:
         env:
           CIBW_BEFORE_ALL: make zetasql
           CIBW_BUILD: cp37-manylinux_x86_64
-          CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux_2014
+          CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux2014_x86_64
           CIBW_ENVIRONMENT: CIBUILDWHEEL_BAZEL_CACHE=/host/tmp/bazel CIBUILDWHEEL_BAZEL_PREFIX=temp
 
       - uses: actions/upload-artifact@v2
