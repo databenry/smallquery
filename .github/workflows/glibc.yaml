@@ -15,6 +15,4 @@ jobs:
       run: |
         gcc --version
 
-        apt install -y gcc-7
-
-        gcc --version
+        clang --version
