@@ -44,7 +44,7 @@ jobs:
             dist/*.tar.gz
 
   upload:
-    needs: [ build ]
+    needs: [ build_wheels ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v2
