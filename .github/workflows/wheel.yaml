@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build_wheels:
     name: Build wheels
-    runs-on: ubuntu-20.04
+    runs-on: macOS-10.15
 
     steps:
       - uses: actions/checkout@v2
@@ -29,8 +29,7 @@ jobs:
         env:
           CIBW_BUILD_VERBOSITY: 1
           CIBW_BEFORE_ALL: make zetasql
-          CIBW_BUILD: cp37-manylinux_x86_64
-          CIBW_MANYLINUX_X86_64_IMAGE: quay.io/pypa/manylinux2014_x86_64
+          CIBW_BUILD: cp39-macosx_arm64 # cp37-manylinux_x86_64
           CIBW_ENVIRONMENT: CIBUILDWHEEL_BAZEL_CACHE=/host/tmp/bazel CIBUILDWHEEL_BAZEL_PREFIX=temp
 
       - name: sdist
