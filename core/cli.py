@@ -1,10 +1,10 @@
 import sys
 import json
-from .testing import Database
+from smallquery import SmallQuery
 
 
 def run_query(args, f_in, f_out):
-    db = Database()
+    db = SmallQuery()
     for a in args:
         with open(a, 'r') as f:
             table_yaml = f.read()

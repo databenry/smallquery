@@ -1,10 +1,11 @@
 name: smallquery-test
 
-on: [ push ]
+on: [] # on: [ push ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: Test
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
@@ -14,11 +15,10 @@ jobs:
       id: cache-bazel
       with:
         path: ~/.cache/bazel
-        key: ${{ runner.os }}-bazel
+        key: ${{ runner.os }}-bazel-v20220215-0
 
     - name: test application
       run: |
         make bazelisk
         make zetasql
-        make
         make test

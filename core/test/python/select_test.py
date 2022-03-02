@@ -1,21 +1,18 @@
 import pytest
-import json
+import smallquery
 from textwrap import dedent
-from smallquery.testing import Database
 
 
-@pytest.fixture
+@pytest.fixture()
 def db():
-    test_db = Database()
-    test_db.create_table_from_yaml(dedent('''
+    db = smallquery.SmallQuery()
+    db.create_table_from_yaml(dedent('''
         name: my_table
-
         columns:
         - name: id
           type: int64
         - name: category
           type: string
-
         records:
         - id: 1
           category: A
@@ -24,7 +21,11 @@ def db():
         - id: 3
           category: B
     '''))
-    return test_db
+    return db
+
+
+def test_select(db):
+    db.execute('select 42 as answer')
 
 
 def test_select_nonull(db):

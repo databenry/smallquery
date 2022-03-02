@@ -1,0 +1,64 @@
+name: Build
+
+on: [] # [push]
+
+jobs:
+  build_wheels:
+    name: Build wheels
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cibw-python-version:
+        - cp37-manylinux_x86_64
+        - cp38-manylinux_x86_64
+        - cp39-manylinux_x86_64
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        name: Cache Build
+        id: cache-build
+        with:
+          path: |
+            /tmp/bazel
+          key: ${{ runner.os }}-${{ matrix.cibw-python-version }}-bazel-v20220216-1
+
+      - uses: actions/setup-python@v2
+
+      - name: Install cibuildwheel
+        run: python3 -m pip install cibuildwheel==2.3.1
+
+      - name: Build wheels
+        run:
+          python3 -m cibuildwheel --output-dir dist
+        env:
+          CIBW_BUILD_VERBOSITY: 1
+          CIBW_BEFORE_ALL: make zetasql
+          CIBW_BUILD: ${{ matrix.cibw-python-version }}
+          CIBW_ENVIRONMENT: CIBUILDWHEEL_BAZEL_CACHE=/host/tmp/bazel CIBUILDWHEEL_BAZEL_PREFIX=temp
+
+      - name: sdist
+        run: python3 setup.py sdist --format gztar
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: python-wheels
+          path: |
+            dist/*.whl
+            dist/*.tar.gz
+
+  upload:
+    needs: [ build_wheels ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: python-wheels
+        path: dist
+
+    - uses: pypa/gh-action-pypi-publish@v1.4.2
+      with:
+        user: __token__
+        password: ${{ secrets.TEST_PYPI_TOKEN }}
+        repository_url: https://test.pypi.org/legacy/

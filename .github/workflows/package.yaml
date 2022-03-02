@@ -1,0 +1,46 @@
+name: smallquery-package
+
+on: [] # on: [ push ]
+
+jobs:
+  build:
+    name: Build wheels on python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['cp37-cp37m', 'cp38-cp38', 'cp39-cp39']
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/cache@v2
+      name: Cache Build
+      id: cache-build
+      with:
+        path: |
+          ./build
+          ~/.cache/bazel
+        key: ${{ runner.os }}-${{ matrix.python-version }}-build-v20220215-1
+
+    - name: build wheel
+      run:
+        PYTHON_COMMAND=/opt/python/${{ matrix.python-version }} make bazelisk zetasql wheel
+
+    - uses: actions/upload-artifact@v2
+      with:
+        path: dist/*
+
+  upload:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: artifact
+        path: dist
+
+    - uses: pypa/gh-action-pypi-publish@v1.4.2
+      with:
+        user: __token__
+        password: ${{ secrets.TEST_PYPI_TOKEN }}
+        repository_url: https://test.pypi.org/legacy/

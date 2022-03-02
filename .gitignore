@@ -5,3 +5,5 @@ dist/
 *.pyc
 build/
 python/smallquery/lib
+tmp/
+*.so

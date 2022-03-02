@@ -52,12 +52,4 @@ private:
     smallquery::Rows run_query_dml(zetasql::SimpleCatalog& catalog, const char* sql);
 };
 
-extern "C" {
-    SmallQuery* SmallQuery_new(){ return new SmallQuery(); }
-    void SmallQuery_delete(SmallQuery* self) { delete self; }
-
-    void SmallQuery_create_table(SmallQuery* self, const char* table_json) { self->CreateTable(table_json); }
-    const char* SmallQuery_execute(SmallQuery* self, const char* sql) { self->Execute(sql); }
-}
-
 #endif

@@ -14,12 +14,6 @@ protected:
 };
 
 
-TEST(SmallQuery, ExternalAPI) {
-    auto sq = SmallQuery_new();
-    SmallQuery_delete(sq);
-}
-
-
 TEST_F(SmallQueryTest, SelectQuery) {
     std::string table_json;
     smallquery::TableData table;
