@@ -30,13 +30,15 @@ class BuildBazelExtension(build_ext.build_ext):
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
 
+        output_user_root = os.getenv('CIBUILDWHEEL_BAZEL_CACHE', './build')
+
         bazel_argv = [
             'python3',
             'tools/ci/bazelisk.py',
-            '--output_user_root=' + os.environ['CIBUILDWHEEL_BAZEL_CACHE'],
+            '--output_user_root=' + output_user_root,
             'build',
             ext.bazel_target,
-            '--symlink_prefix=' + os.path.join(os.environ['CIBUILDWHEEL_BAZEL_PREFIX'], 'bazel-'),
+            '--symlink_prefix=' + os.path.join(self.build_temp, "bazel-"),
             '--compilation_mode=' + ('dbg' if self.debug else 'opt'),
         ]
 

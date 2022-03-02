@@ -28,6 +28,15 @@ py_library(
     ]
 )
 
+cc_test(
+    name = "cc_smallquery_test",
+    srcs = glob(["test/*.cpp"]),
+    deps = [
+        "@com_google_googletest//:gtest_main",
+        ":_smallquery",
+    ]
+)
+
 py_test(
     name = "py_test",
     srcs = glob(["test/python/*.py"]),
